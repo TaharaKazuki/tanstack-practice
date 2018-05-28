@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue_practice3</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="counter++">Increment</button>
+        <button v-on:click="counter--">Decrement</button>
+        <button v-on:click="secondCounter++">Second Increment</button>
+        <p>Counter: {{ counter }}| {{ secondCounter }}</p>
+        <p>result: {{ result() }} | {{ output }}</p>
+    </div>
+<script src="index.js"></script>
+</body>
+</html>
