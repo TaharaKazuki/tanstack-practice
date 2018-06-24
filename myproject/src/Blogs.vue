@@ -23,7 +23,7 @@
     created(){
       axios.get('https://jsonplaceholder.typicode.com/posts/')
         .then( respose => {
-//          console.log(respose);
+          console.log(respose);
           this.posts = respose.data;
         })
         .catch( err => {
