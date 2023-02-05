@@ -6,20 +6,23 @@ const POSTS = [
 ]
 
 const App = () => {
+  const queryClient = useQueryClient()
   const { isLoading, isError, error, data } = useQuery({
     queryKey: ['posts'],
     queryFn: async () => {
-      await wait(200)
+      await wait(2000)
       return [...POSTS]
     },
   })
 
   const newPostMutation = useMutation({
     mutationFn: async (title: string) => {
-      await wait(100)
+      await wait(1000)
       return POSTS.push({ id: crypto.randomUUID(), title })
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      queryClient.invalidateQueries(['posts'])
+    },
   })
 
   if (isLoading) return <h1>Loading...</h1>
@@ -32,7 +35,12 @@ const App = () => {
       {data.map((post) => (
         <div key={post.id}>{post.title}</div>
       ))}
-      <button onClick={() => newPostMutation.mutate('New POST')}>Add New</button>
+      <button
+        disabled={newPostMutation.isLoading}
+        onClick={() => newPostMutation.mutate('New POST')}
+      >
+        Add New
+      </button>
     </div>
   )
 }
